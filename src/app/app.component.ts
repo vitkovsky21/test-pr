@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Chart } from 'angular-highcharts';
+import { testChartOptions } from './helpers/testChartOptions';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'test-pr';
+
 }

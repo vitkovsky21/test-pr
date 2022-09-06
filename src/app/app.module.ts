@@ -3,16 +3,35 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { HeaderComponent } from './components/header/header.component';
+import { MaterialModule } from './material/material.module';
+
+import { ChartModule } from 'angular-highcharts';
+import { ViewComponent } from './views/view/view.component';
+import { SettingsComponent } from './views/settings/settings.component'
+import { baseURL } from './shared/baseurl';
+import { ChartsServiceService } from './services/charts-service.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    ViewComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    ChartModule,
+    HttpClientModule,
+    StoreModule.forRoot({}, {}),
   ],
-  providers: [],
+  providers: [ChartsServiceService, {provide: 'baseURL', useValue: baseURL}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
