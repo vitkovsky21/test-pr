@@ -15,12 +15,13 @@ export class ChartsServiceService {
     return this.http.get<Options[]>(baseURL + 'chartsData');
   }
 
-  putChart(chart: Options): Observable<Options> {
+  putChart(chart: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
       })
     };
-    return this.http.put<Options>(baseURL + 'chartsData/', chart, httpOptions);
+
+    return this.http.put<any>(baseURL + 'chartsData/' + '0', chart, httpOptions);
   }
 }

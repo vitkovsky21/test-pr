@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatCalendarCellCssClasses, MatDateRangeInput, MatDateRangePicker } from '@angular/material/datepicker';
+import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { Chart } from 'angular-highcharts';
 import { ChartsServiceService } from 'src/app/services/charts-service.service';
 
@@ -10,10 +10,6 @@ import { ChartsServiceService } from 'src/app/services/charts-service.service';
   styleUrls: ['./view.component.scss']
 })
 export class ViewComponent implements OnInit {
-
-
-  @ViewChild(MatDateRangeInput) private rangeInput!: MatDateRangeInput<Date>;
-  @ViewChild(MatDateRangePicker) private rangePicker!: MatDateRangePicker<Date>;
 
   charts = new Array;
   
@@ -59,6 +55,10 @@ export class ViewComponent implements OnInit {
   }
 
   onSubmit() {
+    
+    this.chartsArray = [];
+    this.unsortedArray = [];
+
     console.log(this.form.value.daterange.end, "END");
     console.log(this.form.value.daterange.start, "START");
     
@@ -76,14 +76,18 @@ export class ViewComponent implements OnInit {
     
     setTimeout(() => {
       for (let i = 0; i <= this.charts[0].charts.length - 1; i++) {
-        this.unsortedArray = [];
+        
 
-        this.testCharts = new Chart(this.charts[0].charts[i])
-        this.unsortedArray.push(this.testCharts)
+        console.log(dates.includes(new Date(this.charts[0].charts[i].date).toISOString().slice(0, -13)))
 
-        this.chartsArray = this.unsortedArray.sort(function(a,b){
-          return <any>new Date(b.options.date) - <any>new Date(a.options.date);
-        });
+        if (dates.includes(new Date(this.charts[0].charts[i].date).toISOString().slice(0, -13))) {
+          this.testCharts = new Chart(this.charts[0].charts[i])
+          this.unsortedArray.push(this.testCharts)
+  
+          this.chartsArray = this.unsortedArray.sort(function(a,b){
+            return <any>new Date(b.options.date) - <any>new Date(a.options.date);
+          });
+        }
       }
     }, 1000)
   }

@@ -14,13 +14,15 @@ import { SettingsComponent } from './views/settings/settings.component'
 import { baseURL } from './shared/baseurl';
 import { ChartsServiceService } from './services/charts-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ViewComponent,
-    SettingsComponent
+    SettingsComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     ChartModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({}),
   ],
   providers: [ChartsServiceService, {provide: 'baseURL', useValue: baseURL}],
   bootstrap: [AppComponent]

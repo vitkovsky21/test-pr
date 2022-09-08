@@ -1,0 +1,24 @@
+<p>Add a new chart</p>
+
+<div class="container__form">
+    <form class="form-size" novalidate [formGroup]="addChartForm" #commform="ngForm" (ngSubmit)="onSubmit()">
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="text" [(ngModel)]="text" placeholder="Name" type="text" required>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="dates" [(ngModel)]="dates" placeholder="Dates" type="text" required>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="type" [(ngModel)]="type" placeholder="Type (line, spline, area…)" type="text" required>
+          </mat-form-field>
+        </p>
+          <input>{{type}}
+        
+        <button type="submit" [disabled]="commform.invalid" mat-button class="background-primary text-floral-white">Submit</button>
+    </form>
+</div>
