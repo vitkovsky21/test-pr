@@ -31,7 +31,7 @@ export class ChartTemp {
                 }
             },
             series: [
-            {
+              {
                 type: "line",
                 name: "Cristiano Ronaldo",
                 data: [4, 4, 6, 15, 12]

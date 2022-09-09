@@ -14,8 +14,17 @@ import { DataSelectors } from 'src/app/state/handler.selector';
 export class AddDataComponent implements OnInit { 
 
   name!: string;
-  data!: any[];
   type!: string;
+
+  data!: string;
+  dataChange!: any;
+  dataArr: any[] = [];
+
+  seriesObj = {
+    name: '',
+    type: '',
+    data: this.dataArr
+  }
 
   addDataForm = new FormGroup({
     name: new FormControl,
@@ -36,28 +45,27 @@ export class AddDataComponent implements OnInit {
     this.chartsService.getCharts()
       .subscribe(chartsData => this.charts = chartsData)   
     this.data$.subscribe(index => this.index = index)
-    setTimeout(() => {
-      console.log(this.index)
-      console.log(this.charts[0].charts[parseInt(this.index)].series)
-    }, 500)
   }
 
   onSubmit() {
-    console.log("INDEX", this.index)
-    console.log(ChartTemp?.charts)
-
     this.chartsData = ChartTemp?.charts.series;
 
-    this.chartsData.name = this.name;
-    this.chartsData.data = this.data;
-    this.chartsData.type = this.type;
+    this.dataChange = this.data.split(', ')
+    for (let i = 0; i < this.dataChange.length; i++) {  
+      this.dataArr.push(parseInt(this.dataChange[i]))
+    }
 
-    this.charts[0].charts[parseInt(this.index)].series.push({...this.chartsData[0]})
+    this.seriesObj.name = this.name;
+    this.seriesObj.data = this.dataArr;
+    this.seriesObj.type = this.type;
 
+    this.chartsData.push(this.seriesObj)
+
+    this.charts[0].charts[parseInt(this.index)].series.push({...this.chartsData[this.chartsData.length - 1]})
     this.chartsService.putChart(this.charts[0])
       .subscribe(charts => {
         this.charts = charts;
       }
-    )}
-  
+    )
+  }  
 }
