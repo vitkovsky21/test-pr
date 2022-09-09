@@ -1,6 +1,9 @@
 <div class="container">
 
-  <mat-card class="container__charts" *ngFor="let testChart of chartsArray">
+  <mat-card class="container__charts" *ngFor="let testChart of chartsArray; let i = index">
+      <div class="example-button-container" (click)="openModalDataWindow(i)">
+        <button mat-stroked-button color="primary">Add New Data</button>
+      </div>
       <div [chart]="testChart"></div>
   </mat-card>
 

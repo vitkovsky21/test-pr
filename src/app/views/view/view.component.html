@@ -28,7 +28,7 @@
   </form>
 
 
-<mat-card *ngFor="let testChart of chartsArray">
+<mat-card class="container__charts" *ngFor="let testChart of chartsArray">
     <div>{{testChart.options.date.slice(0, -17) | json}}</div>
     <div [chart]="testChart"></div>
 </mat-card>

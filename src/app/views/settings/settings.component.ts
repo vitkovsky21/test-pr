@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { Chart } from 'angular-highcharts';
+import { AddDataComponent } from 'src/app/components/add-data/add-data.component';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ChartsServiceService } from 'src/app/services/charts-service.service';
+import { HandleActions } from 'src/app/state/handler.actions';
 
 @Component({
   selector: 'app-settings',
@@ -17,12 +19,15 @@ export class SettingsComponent implements OnInit {
   unsortedArray = new Array;
   testCharts = new Chart();
 
-  constructor(private chartsService: ChartsServiceService, private dialogRef: MatDialog) { }
+  // @ViewChild() private rangeInput: MatDateRangeInput<Date>;
+
+  constructor(private store$: Store, 
+              private chartsService: ChartsServiceService, 
+              private dialogRef: MatDialog) { }
 
   ngOnInit(): void {
     this.chartsService.getCharts()
       .subscribe(chartsData => this.charts = chartsData)
-
 
     setTimeout(() => {
       
@@ -34,7 +39,7 @@ export class SettingsComponent implements OnInit {
         this.unsortedArray.push(this.testCharts)
 
         this.chartsArray = this.unsortedArray.sort(function(a,b){
-          return <any>new Date(b.options.date) - <any>new Date(a.options.date);
+          return <any>new Date(a.options.date) - <any>new Date(b.options.date);
         });
       }
     }, 1000)
@@ -42,6 +47,13 @@ export class SettingsComponent implements OnInit {
 
   openModalWindow() {
     this.dialogRef.open(ModalComponent)
+  }
+
+  openModalDataWindow(i: number) {
+    let index = i.toString()
+    console.log(index)
+    this.store$.dispatch(HandleActions.sendData({data: index}))
+    this.dialogRef.open(AddDataComponent)
   }
 
 }

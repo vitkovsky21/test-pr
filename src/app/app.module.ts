@@ -15,6 +15,9 @@ import { baseURL } from './shared/baseurl';
 import { ChartsServiceService } from './services/charts-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalComponent } from './components/modal/modal.component';
+import { AddDataComponent } from './components/add-data/add-data.component';
+
+import { dataReducer } from './state/handler.reducer'
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { ModalComponent } from './components/modal/modal.component';
     ViewComponent,
     SettingsComponent,
     ModalComponent,
+    AddDataComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,7 @@ import { ModalComponent } from './components/modal/modal.component';
     MaterialModule,
     ChartModule,
     HttpClientModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({ data: dataReducer }),
   ],
   providers: [ChartsServiceService, {provide: 'baseURL', useValue: baseURL}],
   bootstrap: [AppComponent]
