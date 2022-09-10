@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Chart } from 'angular-highcharts';
 import { AddDataComponent } from 'src/app/components/add-data/add-data.component';
+import { ChangeDataComponent } from 'src/app/components/change-data/change-data.component';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ChartsServiceService } from 'src/app/services/charts-service.service';
 import { HandleActions } from 'src/app/state/handler.actions';
@@ -29,11 +30,7 @@ export class SettingsComponent implements OnInit {
     this.chartsService.getCharts()
       .subscribe(chartsData => this.charts = chartsData)
 
-    setTimeout(() => {
-      
-      console.log(JSON.stringify(this.charts[0]))
-      
-      console.log(this.charts[0].charts.length)
+    setTimeout(() => {      
       for (let i = 0; i <= this.charts[0].charts.length - 1; i++) {
         this.testCharts = new Chart(this.charts[0].charts[i])
         this.unsortedArray.push(this.testCharts)
@@ -51,9 +48,19 @@ export class SettingsComponent implements OnInit {
 
   openModalDataWindow(i: number) {
     let index = i.toString()
-    console.log(index)
     this.store$.dispatch(HandleActions.sendData({data: index}))
+
     this.dialogRef.open(AddDataComponent)
+  }
+
+  openChangeDataWindow(j: number, i: number) {
+    let chartIndex = i.toString()
+    this.store$.dispatch(HandleActions.sendData({data: chartIndex}))
+
+    let dataIndex = j.toString()
+    this.store$.dispatch(HandleActions.changeData({changeData: dataIndex}))
+
+    this.dialogRef.open(ChangeDataComponent)
   }
 
 }

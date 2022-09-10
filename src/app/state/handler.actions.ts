@@ -5,4 +5,8 @@ export namespace HandleActions {
         "SEND_DATA",
         props<{ data: string }>()
     )
+    export const changeData = createAction(
+        "CHANGE_DATA",
+        props<{ changeData: string }>()
+    )
 }

@@ -37,6 +37,7 @@ export class Series {
     type?: string;
     name?: string;
     data?: any;
+    color?: string;
 }
 
 export class Charts {

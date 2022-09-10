@@ -9,11 +9,12 @@ import { ChartTemp } from 'src/app/shared/data/ChartData';
 import { DataSelectors } from 'src/app/state/handler.selector';
 
 @Component({
-  selector: 'app-add-data',
-  templateUrl: './add-data.component.html',
-  styleUrls: ['./add-data.component.scss']
+  selector: 'app-change-data',
+  templateUrl: './change-data.component.html',
+  styleUrls: ['./change-data.component.scss']
 })
-export class AddDataComponent implements OnInit { 
+export class ChangeDataComponent implements OnInit {
+
 
   name!: string;
   type!: string;
@@ -30,7 +31,7 @@ export class AddDataComponent implements OnInit {
     color: ''
   }
 
-  addDataForm = new FormGroup({
+  changeDataForm = new FormGroup({
     name: new FormControl,
     data: new FormControl,
     type: new FormControl,
@@ -39,7 +40,11 @@ export class AddDataComponent implements OnInit {
 
   charts: any;
   data$: Observable<string>
+  changeData$: Observable<string>
+
   index!: string;
+  dataIndex!: string;
+  
   chartsData: any;
 
   constructor(private chartsService: ChartsServiceService, 
@@ -47,12 +52,15 @@ export class AddDataComponent implements OnInit {
               private dialogRef: MatDialog,
               private router: Router) { 
     this.data$ = this.store$.select(DataSelectors.data)
+    
+    this.changeData$ = this.store$.select(DataSelectors.changeData)
   }
 
   ngOnInit(): void {
     this.chartsService.getCharts()
       .subscribe(chartsData => this.charts = chartsData)   
     this.data$.subscribe(index => this.index = index)
+    this.changeData$.subscribe(dataIndex => this.dataIndex = dataIndex)
   }
 
   onSubmit() {
@@ -70,7 +78,9 @@ export class AddDataComponent implements OnInit {
 
     this.chartsData.push(this.seriesObj)
 
-    this.charts[0].charts[parseInt(this.index)].series.push({...this.chartsData[this.chartsData.length - 1]})
+    console.log(parseInt(this.dataIndex))
+    console.log(this.charts[0].charts[parseInt(this.index)].series[parseInt(this.dataIndex)])
+    this.charts[0].charts[parseInt(this.index)].series[parseInt(this.dataIndex)] = {...this.chartsData[this.chartsData.length - 1]}
     this.chartsService.putChart(this.charts[0])
       .subscribe(charts => {
         this.charts = charts;
@@ -83,6 +93,6 @@ export class AddDataComponent implements OnInit {
       }); 
   
       this.dialogRef.closeAll()
-    }, 200)
+    }, 500)
   }  
 }

@@ -17,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalComponent } from './components/modal/modal.component';
 import { AddDataComponent } from './components/add-data/add-data.component';
 
-import { dataReducer } from './state/handler.reducer'
+import { dataReducer } from './state/handler.reducer';
+import { ChangeDataComponent } from './components/change-data/change-data.component'
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { dataReducer } from './state/handler.reducer'
     SettingsComponent,
     ModalComponent,
     AddDataComponent,
+    ChangeDataComponent,
   ],
   imports: [
     BrowserModule,
