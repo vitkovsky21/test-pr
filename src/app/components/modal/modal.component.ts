@@ -65,12 +65,14 @@ export class ModalComponent implements OnInit {
        this.charts = charts;
       })  
 
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/settings']);
-    }); 
+    setTimeout(() => {   
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/settings']);
+      })
+    }, 200)
 
     this.dialogRef.closeAll()
 
-    }
+  }
 
 }

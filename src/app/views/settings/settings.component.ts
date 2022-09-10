@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Chart } from 'angular-highcharts';
 import { AddDataComponent } from 'src/app/components/add-data/add-data.component';
@@ -24,7 +25,8 @@ export class SettingsComponent implements OnInit {
 
   constructor(private store$: Store, 
               private chartsService: ChartsServiceService, 
-              private dialogRef: MatDialog) { }
+              private dialogRef: MatDialog,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.chartsService.getCharts()
@@ -61,6 +63,22 @@ export class SettingsComponent implements OnInit {
     this.store$.dispatch(HandleActions.changeData({changeData: dataIndex}))
 
     this.dialogRef.open(ChangeDataComponent)
+  }
+
+  removeChart(i: number) {
+    console.log(this.charts[0].charts)
+    this.charts[0].charts.splice(i, 1)
+
+    this.chartsService.putChart(this.charts[0])
+    .subscribe(charts => {
+     this.charts = charts;
+    })  
+
+    setTimeout(() => {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/settings']);
+      }); 
+    }, 200)
   }
 
 }

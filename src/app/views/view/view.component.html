@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" *ngIf="chartsArray[0]">
     <mat-form-field>
       <mat-date-range-input
         [rangePicker]="picker"
@@ -27,8 +27,9 @@
     </button>
   </form>
 
-
-<mat-card class="container__charts" *ngFor="let testChart of chartsArray">
-    <div>{{testChart.options.date.slice(0, -17) | json}}</div>
-    <div [chart]="testChart"></div>
-</mat-card>
+<div>
+  <mat-card class="container__charts" *ngFor="let testChart of chartsArray">
+      <div>{{testChart.options.date.slice(0, -17) | json}}</div>
+      <div [chart]="testChart"></div>
+  </mat-card>
+</div>

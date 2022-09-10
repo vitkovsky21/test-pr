@@ -78,8 +78,6 @@ export class ChangeDataComponent implements OnInit {
 
     this.chartsData.push(this.seriesObj)
 
-    console.log(parseInt(this.dataIndex))
-    console.log(this.charts[0].charts[parseInt(this.index)].series[parseInt(this.dataIndex)])
     this.charts[0].charts[parseInt(this.index)].series[parseInt(this.dataIndex)] = {...this.chartsData[this.chartsData.length - 1]}
     this.chartsService.putChart(this.charts[0])
       .subscribe(charts => {
@@ -91,8 +89,8 @@ export class ChangeDataComponent implements OnInit {
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['/settings']);
       }); 
-  
-      this.dialogRef.closeAll()
-    }, 500)
+    }, 200)
+    
+    this.dialogRef.closeAll()
   }  
 }

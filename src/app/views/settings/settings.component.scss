@@ -4,13 +4,40 @@
     width: 4rem;
     height: 4rem;
     border-radius: 2rem;
+    border-width: 0rem;
     text-align: center;
     justify-content: center;
     align-items: center;
     font-weight: bold;
     font-size: 1.1rem;
+    color: #fff;
+    background-color: #3f51b5;
 
     &:hover {
         cursor: pointer;
     }
+}
+
+.settings {
+    display: flex;
+    justify-content: space-between;
+
+    &__data {
+        display: flex;
+        flex-direction: row;
+
+        div {
+            margin-left: 1rem;
+        }
+    }
+}
+
+.warning {
+    position: relative;
+    font-weight: 100;
+    font-size: 1.4rem;
+    top: 13rem;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
 }

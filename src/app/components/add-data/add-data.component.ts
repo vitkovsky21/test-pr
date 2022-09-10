@@ -81,8 +81,9 @@ export class AddDataComponent implements OnInit {
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate(['/settings']);
       }); 
-  
-      this.dialogRef.closeAll()
     }, 200)
+
+    
+    this.dialogRef.closeAll()
   }  
 }

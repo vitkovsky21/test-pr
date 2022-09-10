@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DomElementSchemaRegistry } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Options } from 'highcharts';
 import { Observable } from 'rxjs';
@@ -21,7 +22,6 @@ export class ChartsServiceService {
         'Content-Type':  'application/json'
       })
     };
-
     return this.http.put<any>(baseURL + 'chartsData/' + '0', chart, httpOptions);
   }
 }
