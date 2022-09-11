@@ -1,4 +1,6 @@
-<div class="container">
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+
+<div class="container" *ngIf="!loader">
 
   <mat-card class="container__charts" *ngFor="let testChart of chartsArray; let i = index">
   

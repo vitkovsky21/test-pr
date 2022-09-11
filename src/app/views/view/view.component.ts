@@ -12,6 +12,7 @@ import { ChartsServiceService } from 'src/app/services/charts-service.service';
 export class ViewComponent implements OnInit {
 
   charts = new Array;
+  loader = false;
   
   chartsArray = new Array;
   unsortedArray = new Array;
@@ -26,6 +27,7 @@ export class ViewComponent implements OnInit {
   constructor(private chartsService: ChartsServiceService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.loader = true;
     this.form = this.fb.group({
       daterange: new FormGroup({
         start: new FormControl(),
@@ -51,6 +53,8 @@ export class ViewComponent implements OnInit {
       this.comparisonStart = new Date(this.chartsArray[this.chartsArray.length - 1].options.date);
       this.comparisonEnd = new Date(this.chartsArray[0].options.date);
       this.startAt = new Date(this.chartsArray[this.chartsArray.length - 1].options.date);
+
+      this.loader = false;
     }, 1200)
   }
 

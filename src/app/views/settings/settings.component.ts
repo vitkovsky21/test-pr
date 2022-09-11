@@ -20,6 +20,7 @@ export class SettingsComponent implements OnInit {
   chartsArray = new Array;
   unsortedArray = new Array;
   testCharts = new Chart();
+  loader = false;
 
   // @ViewChild() private rangeInput: MatDateRangeInput<Date>;
 
@@ -29,6 +30,7 @@ export class SettingsComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    this.loader = true;
     this.chartsService.getCharts()
       .subscribe(chartsData => this.charts = chartsData)
 
@@ -40,6 +42,8 @@ export class SettingsComponent implements OnInit {
         this.chartsArray = this.unsortedArray.sort(function(a,b){
           return <any>new Date(a.options.date) - <any>new Date(b.options.date);
         });
+
+        this.loader = false;
       }
     }, 1000)
   }

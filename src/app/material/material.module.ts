@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const MaterialComp = [
     MatButtonModule,
@@ -37,7 +38,8 @@ const MaterialComp = [
     MatSliderModule,
     MatDialogModule,
     MatMenuModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule
 ]
 
 @NgModule({
